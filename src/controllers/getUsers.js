@@ -1,10 +1,10 @@
-const User = require("../models/userModel");
+const data = require("../data/index_db"); //  cualquiera de las dos
+const {list} = require("../data/index_db");// cualquiera de las dos
+const { response } = require("../utils/index_utils");
 
 module.exports = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
+
+  const users = await list(); 
+  response(res, 200, users);
+
 };

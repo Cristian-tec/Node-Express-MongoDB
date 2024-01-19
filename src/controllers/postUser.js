@@ -1,16 +1,10 @@
 const User = require("../models/userModel");
+const response = require("../utils/response");
+const {createUser} = require('../data/index_db')
 
-module.exports = (req, res) =>{
-    try{
-        const {Name, Email, Password} = req.body;
+module.exports = async (req, res) => {
 
-        if(!Name || !Email) throw new Error('Falta Name or Email');
-        
-        User.create({Name, Email, Password})
-        res.status(200).json({Name, Email, Password})
+  createUser(req, res);
+  response(res, 200, req.body);
 
-    }catch (e) {
-        return res.status(404).send(e.message)
-    }
- 
-}
+};

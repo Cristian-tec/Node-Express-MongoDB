@@ -1,5 +1,9 @@
+//Controlador de orden superior para manejar errores  
+//------------------------------------------------------
+const {catchedAsync} = require('../utils/index_utils');
+//------------------------------------------------------
 module.exports = {
-    getUsers: require('./getUsers'),
-    postUser: require('./postUser'),
-    deleteUser: require('./deleteUser')
+    getUsers: catchedAsync(require('./getUsers')),
+    postUser: catchedAsync(require('./postUser')),
+    deleteUser: catchedAsync(require('./deleteUser'))
 }
