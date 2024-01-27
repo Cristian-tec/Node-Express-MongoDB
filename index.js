@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const {PORT} = process.env
 
-server.listen(PORT, ()=>{
+server.listen(PORT, async ()=>{
     console.log(`Server listening ${PORT}`);
-    db();
+    await db();
 })

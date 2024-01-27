@@ -4,7 +4,9 @@ const userModel = new mongoose.Schema({
         type: String,
     },
     Email:{
-        type: String
+        type: String,
+        unique: true,
+        lowercase: true
     },
     Password: {
         type: String,

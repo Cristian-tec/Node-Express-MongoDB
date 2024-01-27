@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  mongo_db:
+    container_name: mongo_db
+    image: mongo:6.0.4
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./init/init-script.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      red_int:
+        ipv4_address: 192.168.20.20
+
+  backend_mongo:
+    depends_on:
+      - mongo_db
+    container_name: backend_mongo
+    build: .
+    restart: always
+    ports:
+      - "8001:8001"
+    networks:
+      red_int:
+        ipv4_address: 192.168.20.10
+
+networks:
+    red_int:
+        ipam:
+            config:
+              - subnet: 192.168.20.0/24
